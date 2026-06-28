@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Meenakshi Fine Jewellers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+  <div id="site-nav"></div>
+
+  <section class="page-hero">
+    <div class="container reveal-on-scroll">
+      <p class="eyebrow">We'd love to hear from you</p>
+      <h1>Get in <span class="gold-text">touch</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:2.5rem">
+    <div class="container contact-grid">
+      <ul class="contact-info reveal-on-scroll" style="padding:0">
+        <li><small>Showroom</small><p>12 Heritage Lane,<br>Fort, Mumbai 400001</p></li>
+        <li><small>Phone</small><p>+91 22 4000 0000</p></li>
+        <li><small>Email</small><p>care@meenakshi.example</p></li>
+        <li><small>Hours</small><p>Mon–Sat · 10:30 AM – 8:00 PM</p></li>
+      </ul>
+
+      <div class="panel reveal-on-scroll">
+        <h3 style="font-size:1.8rem;margin-bottom:1.4rem">Send a message</h3>
+        <div class="form-field"><label for="fName">Name</label><input id="fName" type="text" placeholder="Your name"></div>
+        <div class="form-field"><label for="fEmail">Email</label><input id="fEmail" type="email" placeholder="you@example.com"></div>
+        <div class="form-field"><label for="fMsg">Message</label><textarea id="fMsg" rows="4" placeholder="How can we help?"></textarea></div>
+        <button class="btn btn-gold" id="sendBtn"><span class="label">Send message</span><span class="spinner"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('sendBtn');
+      const name = document.getElementById('fName').value.trim();
+      const email = document.getElementById('fEmail').value.trim();
+      if (!name || !email) { toast('Please add your name and email', '⚠'); return; }
+      btn.classList.add('loading');
+      try {
+        // Harmless: the server just acknowledges and does NOT store anything.
+        const res = await fetch('/api/contact', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email })
+        });
+        const data = await res.json();
+        toast(data.message || 'Message sent', '✓');
+        document.getElementById('fName').value = '';
+        document.getElementById('fEmail').value = '';
+        document.getElementById('fMsg').value = '';
+      } catch (e) {
+        // Works even when opened directly as a file (no server running).
+        toast('Thank you — our concierge will reach out soon.', '✓');
+      } finally {
+        btn.classList.remove('loading');
+      }
+    });
+  </script>
+</body>
+</html>

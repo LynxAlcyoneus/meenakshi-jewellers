@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Login — Meenakshi Jewellers</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background:#fafafa; color:#262626; font-family: 'Jost', sans-serif; }
+    .insta-shell { max-width: 420px; margin: 3rem auto; padding: 2rem; background:#fff; border:1px solid #dbdbdb; border-radius:1rem; text-align:center; }
+    .insta-brand { font-family: 'Cormorant Garamond', serif; font-size:2.4rem; letter-spacing:0.15em; margin-bottom:1.2rem; }
+    .insta-sub { color:#8e8e8e; margin-bottom:1.5rem; }
+    .insta-form { display:grid; gap:1rem; }
+    .insta-form input { width:100%; padding:0.95rem 1rem; border:1px solid #dbdbdb; border-radius:0.35rem; background:#fafafa; color:#262626; font-size:0.95rem; }
+    .insta-form button { background:#0095f6; color:#fff; border:none; padding:0.95rem 1rem; border-radius:0.35rem; font-weight:600; cursor:pointer; }
+    .insta-form button:hover { background:#0085e6; }
+    .note { color:#8e8e8e; font-size:0.95rem; margin-top:1rem; }
+    .footer-link { color:#0095f6; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <main class="insta-shell">
+    <div class="insta-brand">Instagram</div>
+    <p class="insta-sub">Log in to continue to the Meenakshi Jewellers profile.</p>
+    <form class="insta-form" id="instaForm">
+      <input id="instaUser" type="text" name="username" placeholder="Phone number, username, or email" autocomplete="username">
+      <input id="instaPass" type="password" name="password" placeholder="Password" autocomplete="current-password">
+      <button type="submit">Log In</button>
+    </form>
+    <p class="note" id="statusText">Your credentials were prefilled from the demo popup.</p>
+    <p class="note">After clicking login, this will show a preview and then offer to visit the Instagram page.</p>
+    <p class="note"><a class="footer-link" id="visitLink" href="#" style="display:none;">Go to Instagram profile</a></p>
+  </main>
+
+  <script>
+    const data = sessionStorage.getItem('instaPreviewCreds');
+    const creds = data ? JSON.parse(data) : null;
+    const userInput = document.getElementById('instaUser');
+    const passInput = document.getElementById('instaPass');
+    const statusText = document.getElementById('statusText');
+    const visitLink = document.getElementById('visitLink');
+
+    if (creds) {
+      userInput.value = creds.username || '';
+      passInput.value = creds.password || '';
+      sessionStorage.removeItem('instaPreviewCreds');
+    } else {
+      statusText.textContent = 'No credentials were passed. Fill the form manually.';
+    }
+
+    document.getElementById('instaForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      statusText.textContent = 'Credentials submitted. Redirecting to the Instagram profile...';
+      visitLink.href = 'https://www.instagram.com/';
+      visitLink.style.display = 'inline-block';
+      setTimeout(() => {
+        window.location.href = 'https://www.instagram.com/';
+      }, 900);
+    });
+  </script>
+</body>
+</html>
