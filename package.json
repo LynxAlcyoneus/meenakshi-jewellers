@@ -1,0 +1,22 @@
+{
+  "name": "meenakshi-jewellers",
+  "version": "1.0.0",
+  "description": "A luxury jewellery storefront built as a safe, self-contained phishing-awareness demonstration for a cybersecurity classroom.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "cybersecurity",
+    "phishing-awareness",
+    "education",
+    "express",
+    "demo"
+  ],
+  "author": "Cybersecurity Lab",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
