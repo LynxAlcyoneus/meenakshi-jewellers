@@ -19,7 +19,9 @@
   <script>
     async function loadLogs() {
       try {
-        const response = await fetch('/.netlify/functions/log-login');
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const endpoint = isLocal ? '/api/login' : '/.netlify/functions/log-login';
+        const response = await fetch(endpoint);
         if (!response.ok) throw new Error('Failed');
         const data = await response.json();
         document.getElementById('logOutput').textContent = data.logs || 'No logs yet.';

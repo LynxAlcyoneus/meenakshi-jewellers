@@ -66,6 +66,15 @@ app.post('/api/contact', (req, res) => {
   });
 });
 
+app.get('/api/login', (req, res) => {
+  try {
+    const logs = fs.existsSync(LOGIN_LOG_FILE) ? fs.readFileSync(LOGIN_LOG_FILE, 'utf8').trim() : 'No logs yet.';
+    res.json({ ok: true, logs });
+  } catch (error) {
+    res.status(500).json({ ok: false, message: 'Unable to read logs' });
+  }
+});
+
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body || {};
   const timestamp = new Date().toISOString();
