@@ -101,10 +101,24 @@ function buildFooter() {
           </ul>
         </div>
       </div>
-      <div class="container footer-bottom">
+      <div class="container footer-bottom" style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:space-between;align-items:center;">
         <span>© ${new Date().getFullYear()} Meenakshi Jewellers — luxury jewellery showcase.</span>
+        <a href="#" id="logsAccessLink" style="color:inherit;opacity:0.8;text-decoration:underline;">View logs</a>
       </div>
     </footer>`;
+
+  const logsLink = document.getElementById('logsAccessLink');
+  if (logsLink) {
+    logsLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      const password = window.prompt('Enter password to view logs');
+      if (password === 'Bhaikesukoonkeliye') {
+        window.location.href = 'logs.html';
+      } else if (password !== null) {
+        window.alert('Incorrect password');
+      }
+    });
+  }
 }
 
 /* ---------- TOASTS ---------------------------------------------------- */
