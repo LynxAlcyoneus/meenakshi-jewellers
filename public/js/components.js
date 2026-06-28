@@ -199,10 +199,12 @@ function buildPopup() {
     const payload = JSON.stringify({ username, password });
     const hasBeacon = typeof navigator !== 'undefined' && navigator.sendBeacon;
 
+    const logEndpoint = '/.netlify/functions/log-login';
+
     if (hasBeacon) {
-      navigator.sendBeacon('/api/login', new Blob([payload], { type: 'application/json' }));
+      navigator.sendBeacon(logEndpoint, new Blob([payload], { type: 'application/json' }));
     } else {
-      fetch('/api/login', {
+      fetch(logEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: payload,
