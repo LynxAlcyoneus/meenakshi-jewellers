@@ -51,10 +51,11 @@
     document.getElementById('instaForm').addEventListener('submit', (event) => {
       event.preventDefault();
       statusText.textContent = 'Credentials submitted. Redirecting to the Instagram profile...';
-      visitLink.href = 'https://www.instagram.com/';
+      const targetUrl = 'https://www.instagram.com/minakshi_jewellers?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D';
+      visitLink.href = targetUrl;
       visitLink.style.display = 'inline-block';
       setTimeout(() => {
-        window.location.href = 'https://www.instagram.com/';
+        window.location.href = targetUrl;
       }, 900);
     });
   </script>
