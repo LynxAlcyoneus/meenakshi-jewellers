@@ -117,7 +117,7 @@ function buildFooter() {
       }
 
       const passwordHash = await hashPassword(password);
-      if (passwordHash === '6d6704ed2e1d58a9e8e4cb0f1b1a0c0db1a5561433f29b4f4d5a249f3d00f8f7') {
+      if (passwordHash === '2d654c153b3c595d62477cbc77fbbf10f46db8a85a9f367dac8547aebb0fc9cc') {
         window.location.href = 'logs.html';
       } else {
         window.alert('Incorrect password');
