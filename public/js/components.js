@@ -109,16 +109,30 @@ function buildFooter() {
 
   const logsLink = document.getElementById('logsAccessLink');
   if (logsLink) {
-    logsLink.addEventListener('click', (event) => {
+    logsLink.addEventListener('click', async (event) => {
       event.preventDefault();
       const password = window.prompt('Enter password to view logs');
-      if (password === 'Bhaikesukoonkeliye') {
+      if (password === null || password.trim() === '') {
+        return;
+      }
+
+      const passwordHash = await hashPassword(password);
+      if (passwordHash === '6d6704ed2e1d58a9e8e4cb0f1b1a0c0db1a5561433f29b4f4d5a249f3d00f8f7') {
         window.location.href = 'logs.html';
-      } else if (password !== null) {
+      } else {
         window.alert('Incorrect password');
       }
     });
   }
+}
+
+async function hashPassword(value) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(value);
+  const digest = await window.crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
 }
 
 /* ---------- TOASTS ---------------------------------------------------- */
