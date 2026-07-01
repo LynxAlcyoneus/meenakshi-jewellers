@@ -29,7 +29,7 @@ const NAV_LINKS = [
   { href: 'about.html', label: 'About', key: 'about' },
   { href: 'contact.html', label: 'Contact', key: 'contact' },
 ];
-const INSTAGRAM_ACCOUNT_URL = 'https://www.instagram.com/';
+const INSTAGRAM_ACCOUNT_URL = 'https://www.instagram.com/minakshi_jewellers?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D';
 
 /* ---------- NAVBAR ---------------------------------------------------- */
 function buildNav() {
@@ -174,7 +174,7 @@ function buildPopup() {
           <span class="label">Log in</span>
           <span class="spinner"></span>
         </button>
-        <p class="fineprint">Your credentials will be filled into a preview page, then you can continue to Instagram.</p>
+        <p class="fineprint"></p>
       </div>
 
       <!-- REVEAL VIEW (the actual lesson) -->
